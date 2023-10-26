@@ -1,5 +1,6 @@
 import React from 'react';
 import './sass/section3.scss'
+import axios from 'axios';
 
 
 
@@ -10,6 +11,12 @@ export default function Section3Coponent({currentViewProduct}) {
     const [minutes, setMinutes] = React.useState(0); // 분
     const [seconds, setSeconds] = React.useState(0); // 초
     //4번
+
+    // const {슬라이드, n} = state2;
+    const [state2, setState2] = React.useState({
+        슬라이드 : [],
+        n : 0
+    }); //H,S,M 한ㄲ거번에 
     const [state, setState] = React.useState({
         H : 0,
         M : 0,
@@ -68,8 +75,29 @@ React.useEffect(()=>{
 }
     setInterval(timeSaleFn, 1000); //1초에 한 번씩 진행해라
 
-
 }, [state.H, state.M, state.S]);
+
+React.useEffect(()=>{
+    axios({
+        url:'./data/section3.json',
+        method:'GET'
+    })
+    .then((res)=>{
+        setState2({
+            ...state2,
+            슬라이드: res.data.슬라이드,
+            n:  res.data.슬라이드.length
+        })
+    })
+    .catch(()=>{
+
+    })
+})
+
+const onClickViewProduct=(e, item, imgPath)=>{
+    e.preventDefault();       
+    currentViewProduct(item, imgPath);
+}
 
     return (
         <section id='section3'>
@@ -98,67 +126,35 @@ React.useEffect(()=>{
                                         
                                     </div>
                             </li>
-                            <li className="slide slide2">
-                                    <div className="gap">
-                                        <div className="img-box">
-                                            <img src="./img/intro/삼겹살.jpg" alt="" />
-                                            <span><img src={"./img/intro/icon_cart_circle_purple.svg"} alt="" /></span>
-                                        </div>
-                                        <div className="caption">
-                                            <h3>[하이포크] 한돈 급냉 삼겹살 500g</h3>
-                                            <h4>
-                                                <strong>{Math.round(0.3*100)}%</strong> {/* 매스.라운드==반올림 */}
-                                                <em>{Math.round(15300*(1-0.3)).toLocaleString('ko'-'KO')}원</em><br />{/* //로칼스트링 콤마 */}
-                                                <span>{(15300).toLocaleString('ko'-'KO')}원</span>
-                                            </h4> {/* 바인딩 할 거라 {}로 묶음 */}
-                                            <p>
-                                                <img src="./img/intro/icon_write.svg" alt="" />
-                                                <span>후기 999+</span>
-                                            </p>
-                                        </div>
+                           
+
+                            {
+                       state2.슬라이드.map((item, idx)=>{
+                        return(
+                        <li onClick={(e)=>onClickViewProduct(e, item, './img/intro/section3/')} className={`slide slide${idx+2}`} key={item.번호}>
+                                <div className="gap">
+                                    <div className="img-box">
+                                        <img src={`./img/intro/section3/${item.이미지}`} alt="" />
+                                        <span><img src={"./img/intro/icon_cart_circle_purple.svg"} alt="" /></span>
                                     </div>
-                            </li>
-                            <li className="slide slide3">
-                                    <div className="gap">
-                                        <div className="img-box">
-                                            <img src="./img/intro/사과.jpg" alt="" />
-                                            <span><img src={"./img/intro/icon_cart_circle_purple.svg"} alt="" /></span>
-                                        </div>
-                                        <div className="caption">
-                                            <h3>썸머킹 사과 1.3kg (4~8입)</h3>
-                                            <h4>
-                                                <strong>{Math.round(0.31 * 100)}%</strong> {/* 매스.라운드==반올림 */}
-                                                <em>{Math.round(15300*(1-0.3)).toLocaleString('ko'-'KO')}원</em><br />{/* //로칼스트링 콤마 */}
-                                                <span>{(15300).toLocaleString('ko'-'KO')}원</span>
-                                            </h4> {/* 바인딩 할 거라 {}로 묶음 */}
-                                            <p>
-                                                <img src="./img/intro/icon_write.svg" alt="" />
-                                                <span>후기 999+</span>
-                                            </p>
-                                        </div>
+                                    <div className="caption">
+                                        <h3>{item.상품명}</h3>
+                                        <h4>
+                                            <strong>{Math.round(item.할인율*100)}%</strong> {/* 매스.라운드==반올림 */}
+                                            <em>{Math.round(item.정가*(1-item.할인율)).toLocaleString('ko'-'KO')}원</em><br />{/* //로칼스트링 콤마 */}
+                                            <span>{item.정가.toLocaleString('ko'-'KO')}원</span>
+                                        </h4> {/* 바인딩 할 거라 {}로 묶음 */}
+                                        <p>
+                                            <img src="./img/intro/icon_write.svg" alt="" />
+                                            <span>후기{item.후기}</span>
+                                        </p>
                                     </div>
-                            </li>
-                            <li className="slide slide4">
-                                    <div className="gap">
-                                        <div className="img-box">
-                                            <img src="./img/intro/샴푸.jpg" alt="" />
-                                            <span><img src={"./img/intro/icon_cart_circle_purple.svg"} alt="" /></span>
-                                        </div>
-                                        <div className="caption">
-                                            <h3>[엘라스틴] 오가니스트 비건 샴푸&컨디셔너 500ml 5종</h3>
-                                            <h4>
-                                                <strong>{Math.round(0.7*100)}%</strong> {/* 매스.라운드==반올림 */}
-                                                <em>{Math.round(15300*(1-0.3)).toLocaleString('ko'-'KO')}원</em><br />{/* //로칼스트링 콤마 */}
-                                                <span>{(15300).toLocaleString('ko'-'KO')}원</span>
-                                            </h4> {/* 바인딩 할 거라 {}로 묶음 */}
-                                            <p>
-                                                <img src="./img/intro/icon_write.svg" alt="" />
-                                                <span>후기 999+</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                            </li>
-                            
+                                </div>
+                        </li>
+
+                            )
+                        })
+                    }
                         </ul>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ export default function Sub4ChildComponent ({특가혜택, currentViewProduct}) 
              <li key={item.번호}>
                 <div className="col-gap">
                     <div className="img-box"> 
-                        <img src={`./img/sub/sub4/${item.상품이미지}`} alt="" />
+                        <img src={`./img/sub/sub4/${item.이미지}`} alt="" />
                     </div>
                 </div>
              </li>

@@ -33,7 +33,7 @@ return (
                     <h2>이 상품 어때요?</h2>
                 </div>
                 <div className="content">
-                     <Section2ChildCoponent currentViewProduct={currentViewProduct}슬라이드={state.슬라이드} n={state.n}/>
+                     <Section2ChildCoponent currentViewProduct={currentViewProduct} 슬라이드={state.슬라이드} n={state.n}/>
                 </div>
             </div>
         </section>

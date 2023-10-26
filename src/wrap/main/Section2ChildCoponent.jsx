@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Section2ChildCoponent({currentViewProduct, 슬라이드}) {
+export default function Section3ChildCoponent({currentViewProduct, 슬라이드}) {
     const slideWrap = React.useRef();
     const [state, setState] = React.useState({
         cnt:0

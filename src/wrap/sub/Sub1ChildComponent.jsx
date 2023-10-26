@@ -15,7 +15,7 @@ export default function Sub1ChildComponent ({신상품, currentViewProduct}) {
              <li key={item.번호} onClick={(e)=>onClickViewProduct(e, item, './img/sub/sub1/')}>
              <div className="col-gap">
                  <div className="img-box"> 
-                     <img src={`./img/sub/sub1/${item.상품이미지}`} alt="" />
+                     <img src={`./img/sub/sub1/${item.이미지}`} alt="" />
                  </div>
                  <div className="button-box">
                      <a href="!#"><img src="./img/sub/sub1/icon_cart_middle.svg" alt="" />담기</a>

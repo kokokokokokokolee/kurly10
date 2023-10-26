@@ -83,7 +83,7 @@ export default function WrapComponent() {
         const obj = {
             번호: item.번호,
             상품명: item.상품명,
-            이미지: `${imgPath}${item.이미지}`,
+            이미지: `${imgPath}${imgPath.indexOf('section4')!== -1 ? 'sec4_img.png' : item.이미지}`, //현재 위치가 섹션 4라면 저 이미지를 넣고 아니라면 어쩌구
             정가: item.정가,
             할인율: `${Math.round(item.할인율 * 100)}%`,
             판매가: Math.round(item.정가 * (1-item.할인율)),
